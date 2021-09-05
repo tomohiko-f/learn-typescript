@@ -34,3 +34,12 @@
 - optional ?: ?をプロパティや引数につけることで、xx | undefined を定義することが可能、その場合 if (prop) {} のようなチェックが必要
   - 引数に optional をつける場合 -> function func(xxx: string, ooo?: number) のように optional 引数を後ろに定義する必要がある
 - デフォルト引数を設定する場合：引数に何も指定をしなくてもエラーにならない
+
+## より実践的な Ts の書き方
+
+### type Guard
+
+- typeof, in, instanceof の三つがある
+- typeof: string や number, object など javascript に存在する型チェックが可能
+- in: オブジェクトに定義したプロパティのチェックが可能
+- instanceof: クラスを定義した instance のチェックが可能
