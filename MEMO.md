@@ -34,3 +34,66 @@
 - optional ?: ?をプロパティや引数につけることで、xx | undefined を定義することが可能、その場合 if (prop) {} のようなチェックが必要
   - 引数に optional をつける場合 -> function func(xxx: string, ooo?: number) のように optional 引数を後ろに定義する必要がある
 - デフォルト引数を設定する場合：引数に何も指定をしなくてもエラーにならない
+
+## より実践的な Ts の書き方
+
+### type Guard
+
+- typeof, in, instanceof の三つがある
+- typeof: string や number, object など javascript に存在する型チェックが可能
+- in: オブジェクトに定義したプロパティのチェックが可能
+- instanceof: クラスを定義した instance のチェックが可能
+
+###  tag 付き Union
+
+- 変数にタグ（リテラル型）をつけることで、case 文などで推論させることが可能
+  - interface でも使用可能
+
+### インデックスシグネチャ
+
+- interface の定義時に、[index: string]: string; で定義
+- インデックスシグネチャで定義した型に合わせる必要がある
+
+```
+interface Musician {
+  age: number; // これだとエラーにある（stringにする必要がある）
+  [index: string]: string;
+}
+```
+
+- 定義していないプロパティでもエラーにならないので注意
+
+### optional chaining
+
+- optional(?)で定義したプロパティに対して、アクセスする場合に使用
+- `hoge?.mogu?.name` のように使う -> 値がなかった場合 undefined を返す
+
+### nullish coalescing
+
+- ??で定義
+  - const musicianPlay = musician.name ?? 'do not play';
+- null, undefined の場合のみに定義した値を返す
+- ||との違い
+  - ||の場合：左辺が空文字などでも右辺の値を返す
+
+### 型の互換性
+
+- 左辺＜右辺で定義されていれば使える -> これだけ覚えておく
+
+### 関数の intersection
+
+- let intersectionFunc: FuncA & FuncB -> FuncA, B がオーバーロードされたものになる
+- union 型の場合は never 型になる
+  - ただし、どちらかの関数を定義すれば使える
+
+### rest parameter
+
+- 可変長引数として定義できる
+- タプルも可能
+- 配列、タプルには readonly をつけることが可能
+
+### const アサーション
+
+- as const を変数につけることでリテラル型として定義できる
+- 配列でも可能
+- _enum を使わなくても、as const をつけることで enum っぽく定義できる_ よく使う
