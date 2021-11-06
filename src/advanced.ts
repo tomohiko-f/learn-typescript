@@ -94,5 +94,7 @@ console.log(musicianPlay);
 // function advancedFn(...arg: number[]]) {}
 // advancedFn(3, 3, 3);
 // タプルも可能
-function advancedFn(...arg: readonly [number, string, boolean]) {}
+function advancedFn(...arg: readonly [number, string, boolean]) {
+  console.log(arg);
+}
 advancedFn(3, 'test', false);
